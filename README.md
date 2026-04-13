@@ -1,169 +1,185 @@
-# 🚗 Vehicle Sales & Market Intelligence Analysis
+# Vehicle Sales Exploratory Data Analysis
 
-This project delivers a comprehensive **exploratory data analysis (EDA)** on U.S. automotive sales using the *Vehicle Sales and Market Trends Dataset* (Kaggle, 2024). The objective is to uncover **market behavior, pricing dynamics, and consumer preferences** to support data-driven decision-making in the automotive domain.
+The [Vehicle Sales and Market Trends Dataset](https://www.kaggle.com/datasets/syedanwarafridi/vehicle-sales-data) dataset is a publicly available dataset from Kaggle, published by Syed Anwar in February 2024. It provides a comprehensive collection of information about the sales transactions of various vehicles from the years 2014 to 2015. This dataset encompasses details such as the manufacture year, make, model, trim, body type, transmission type, VIN (Vehicle Identification Number), state of registration, condition rating, odometer reading, exterior and interior colors, seller information, Manheim Market Report (MMR) values, selling prices, and sale dates.
 
----
+This data science project aims to perform exploratory market analysis on the Automotive Market, gleaning insight into consumer preferences and demands, sales trends, and pricing fluctuations based on various factors. The resulting insights can help automotive dealers and industry professionals better understand consumer preferences and make informed decisions on catering to their needs.
 
-## 📊 Project Overview
+## **Final Columns**
 
-The dataset captures detailed vehicle transaction data from **2014–2015**, including:
+<details>
+  <summary>These are the final columns comprising the ETL pipeline's resulting data set.</summary>
 
-- Vehicle attributes (Make, Model, Trim, Body, Transmission)
-- Pricing metrics (Market Value vs Selling Price)
-- Customer & seller information
-- Geographic and temporal dimensions
-- Vehicle condition and mileage
+- **Year** - The manufacturing year of the vehicle.
+- **Make** - The brand or manufacturer of the vehicle.
+- **Model** - The specific model of the vehicle.
+- **Trim** - Additional designation for the vehicle model.
+- **Body** - The body type of the vehicle (e.g., SUV, Sedan).
+- **Transmission** - The transmission type of the vehicle (e.g., automatic).
+- **Vehicle Identification Number** - A unique code designated to each vehicle.
+- **State Code** - The two-letter code of the state where the vehicle is registered.
+- **Odometer** - The mileage or distance traveled by the vehicle.
+- **Color** - Exterior color of the vehicle.
+- **Interior** - Interior color of the vehicle.
+- **Seller** - The entity selling the vehicle.
+- **Market Price** - The estimated market value of the vehicle based on the Manheim Market Report.
+- **Selling Price** - The price at which the vehicle was sold.
+- **Sale Date** - The date when the vehicle was sold.
+</details>
 
-This project transforms raw data into **actionable insights** through structured analysis and visualization.
+## **Grain Columns**
 
----
+<details>
+  <summary>These columns are implemented to introduce more granularity into the final data set.</summary>
 
-## 🏗️ Data Engineering & Feature Design
+- **State** - The state where the vehicle is registered.
+- **Sale Year** - Year the vehicle was sold.
+- **Sale Month** - Month number the vehicle was sold.
+- **Sale Month Name** - Name of the month the vehicle was sold.
+- **Sale Day of Week** - Day of week the vehicle was sold.
+- **Sale Day Name** - Name of the day the vehicle was sold.
+- **Sale Month Short Name** - Short name of the month the vehicle was sold.
+</details>
 
-### Core Dataset (Post-ETL)
+## Business Questions
 
-- Vehicle specifications: Year, Make, Model, Trim, Body, Transmission  
-- Unique identifier: VIN  
-- Location: State Code  
-- Usage metrics: Odometer  
-- Aesthetic attributes: Exterior & Interior Colors  
-- Seller information  
-- Financial metrics: Market Price (MMR), Selling Price  
-- Transaction date: Sale Date  
+<details>
+  <summary><strong>Sales Inquiries</strong></summary>
+  <div>
+    <p><i>What is the disparity between the annual average reported market prices and the selling prices of vehicles from 2014 to 2015, and what has been the overall trend?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Market%20Vs%20Selling%20Price.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;The results indicate that between 2014 and 2015, both the annual average reported market and selling prices of vehicles rose in value. Moreover, analyzing the annual average reported market and selling prices during that time reveals a fascinating trend. In 2014, the average market price was $12,945.37, while the average selling price was slightly lower at $12,735.92, resulting in a disparity of $209.45. Meanwhile, in 2015, the average market price increased to $13,903.61, and the average selling price also increased to $13,768.14, resulting in a smaller disparity of $135.47. These findings suggest that vehicles are being sold at prices closer to their market price in 2015 compared to 2014; this implies that the disparity between the average reported market prices and the average selling prices of vehicles is narrowing over time.</p>
+  </div>
+  <br>
+  <p><i>What are the quarterly sales figures over the years?</i></p>
+  <div>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Quarterly%20Sales%202014.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;The results indicate a significant increase in sales from the beginning of 2014 to its end, with Q4 showing a substantial spike in total sales and the number of vehicles sold compared to earlier quarters.</p>
+    <p align="justify">In Q1 of 2014, the automotive market saw a strong performance in January, recording $1.56 billion in sales and 117,354 vehicles sold. However, sales figures in February experienced a drastic drop in sales, presenting only $10,500 in revenue from 1 vehicle sold; this perceived sharp plunge is likely due to an unclear external factor.</p>
+    <p align="justify">The absence of sales data for Q3 and Q4 limits the comprehensive analysis of the year's sales performance. Alternatively, it could suggest that potential seasonal variations or market-specific influences may have influenced consumer purchasing behavior throughout the year. Further accounting and analysis could provide deeper insights into the underlying factors driving these fluctuations and provide a more comprehensive explanation.</p>
+  </div>
+  <br>
+  <div>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Quarterly%20Sales%202015.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;The results show sales volatility for 2015, with periods of growth followed by declines. In Q1 of 2015, sales figures showed a strong start in January, amounting to $1.55 billion in sales and 117,354 vehicles sold. February continued this positive trend as sales increased to $1.87 billion and 137,587 vehicles sold. However, March saw a significant decline in sales, dropping to $529,028,047 with just 39,312 units sold.</p>
+    <p align="justify">In Q2, sales figures indicate a slight recovery, with May recording $598 million in sales with 42,882 vehicles sold. June represented a further recovery as sales revenue reached $1.24 billion after 84,152 units sold.</p>
+    <p align="justify">However, Q3 of 2015 started with a significant marked decline from the previous months, with July finding only $18 million in sales from 1,075 vehicles sold.</p>
+    <p align="justify">The results overall demonstrate the fluctuations in vehicle sales and suggest potential seasonal trends or external factors that may have influenced sales patterns in the automotive market during 2015, with the second quarter showing the best performance.</p>
+  </div>
+  <br>
+  <div>
+    <p><i>What are the highest-grossing vehicle types overall?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Highest%20Sales%20by%20Vehicle%20Body%20Type.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;The results highlight the diverse preferences of consumers for different vehicle types in the U.S. automotive market; in terms of gross sales value, Sedans are the highest-grossing vehicle type overall, with a total sales value exceeding $2.4 billion. SUVs follow closely behind, with sales totaling $1.89 billion—indicating their popularity and strong market demand. Crew Cabs, Minivans, and Coupes trail behind with considerably less but still significant gross sales values of $296 million, $243 million, and $242 million, respectively. Hatchbacks and SuperCrews round out the list with sales values of $236 million and $164 million, respectively. These findings suggest that consumers prefer to purchase vehicles with comfortable and practical accommodations for four or more passengers.</p>
+  </div>
+</details>
 
-### Enhanced Analytical Features
+<details>
+  <summary><strong>Product Inquiries</strong></summary>
+  <div>
+    <p><i>What are the highest-grossing vehicle types by manufacture year?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Highest%20Grossing%20Vehicle%20Types%20by%20Manufacturing%20Year.png"></img>
+    </div>
+  </div>
+  <br>
+  <div>
+    <p><i>What are the highest-selling vehicle types by manufacture year?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Highest%20Selling%20Vehicle%20Types%20by%20Manufacturing%20Year.png"></img>
+    </div>
+  </div>
+  <br>
+  <p align="justify">&nbsp;&nbsp;As seen above in the figures above, the results on the top 3 highest-grossing and highest-selling vehicle types (Sedan, SUV, and CrewCab) by manufacture year from 2011 to 2015 demonstrate the following insights:</p>
+  <ul>
+    <li align="justify">Across their manufacturing years, Sedans are consistently the highest-grossing and highest-selling vehicle type at 206,429 units sold for $2.4 billion in total revenue. SUVs follow behind at 117,229 units sold for $1.89 billion in revenue, and CrewCabs at 13,627 units sold for $296 million. These figures suggest that Sedans are the prime choice of vehicle in the automotive industry among consumers, manufacturers, and dealers alike, and continue to generate significant demand and revenue regardless of their manufacture year.</li>
+    <li align="justify">There are considerable variances in sales among distinct manufacturing years, indicating fluctuations in market demand. Notably, as newer vehicle models enter the market and displace older models, cumulative sales experienced a downward trend in revenue and the number of units sold; this implies that consumers prefer to purchase older models, or possibly, there is a decline in the automotive market over time.</li>
+  </ul>
+  <p align="justify">These results overall show that the United States is a lucrative market for vehicle dealers and manufacturers.</p>
+</details>
 
-To improve granularity and enable time-based analysis:
+<details>
+  <summary><strong>Brand Inquiries</strong></summary>
+  <div>
+    <p><i>What are the top 5 brands in terms of total sales?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Top%20Brands%20by%20Total%20Sales.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;The results illustrate the strong performance of automotive brands in the U.S. market in sales volume and market share. At the top spot, Ford emerges as a clear leader in the U.S. automotive industry with a gross sales value of roughly $1.16 billion, showcasing its strong market presence and consumer appeal. Chevrolet follows at a considerably lower market share than Ford at $621 million. Nissan and Toyota trail behind with competitive gross sales values of $507 million and $427 million, respectively. Lastly, BMW is the 5th top brand with a gross sales value of $362 million, highlighting its success in capturing a large consumer base.</p>
+  </div>
+  <br>
+  <div>
+    <p><i>What are the top 5 brands in terms of how many vehicles they sold?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Top%20Brands%20by%20Number%20of%20Vehicles%20Sold.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;These results illustrate the strong performance of automotive brands in the U.S. market in terms of sales volume and market share. Based on the number of vehicles sold, Ford leads the U.S. market with a total of 78,858 units, capturing a significant market share of 33.50%. Chevrolet follows with 52,580 sold, comprising 22.34% of the market. Nissan and Toyota trail behind with 43,128 and 34,463 units sold, respectively, showing their competitive positions in the automotive industry. Lastly, Dodge is the 5th top brand, with 26,634 vehicles sold, representing 11.20% of the market.</p>
+  </div>
+</details>
 
-- State (full name)
-- Sale Year, Month, Day
-- Month Name & Short Name
-- Day of Week
+<details>
+  <summary><strong>Consumer Preferences</strong></summary>
+  <div>
+    <p><i>What are the most common vehicle body types?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Most%20Common%20Vehicle%20Body%20Type.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;The results illustrate the popularity of different vehicle types available in the U.S. automotive market. In terms of total units sold, the most common vehicle type is Sedans, with a total of 206,429 units sold (47.55%). The remaining most common vehicles are SUVs at 117,229 units (27.01%), Hatchbacks at 23,184 units (5.34%), Minivans at 21,429 units (4.94%), Coupes at 5,537 units (3.54%), Wagons at 13,816 units (3.18%), and Crew Cabs at 13,627 units (3.14%), Convertibles at 8,935 units (2.06%), SuperCrews at 7,278 units (1.68%), and lastly, G Sedans at 6,812 units (1.57%).</p>
+  </div>
+  <br>
+  <div>
+    <p><i>What are the most common vehicle colors?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Most%20Common%20Vehicle%20Colors.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;The results illustrate the popularity of color choices in the U.S. automotive market. In the number of units sold under the specific color, the most common vehicle color is Black, with a total of 90,446 units (21.25%). The remaining most common vehicle colors are White at 86,860 units (20.41%), Silver at 69,167 units (16.25%), Gray at 68,734 units (16.15%) and Blue at 44,622 units (10.48%), Red at 40,372 units (9.49%), Gold at 14,795 units (3.48%), and lastly, Purple at 10,644 units (2.5%). These findings suggest that monotone or grayscale colors are the most popular among vehicle owners and manufacturers in the U.S.</p>
+  </div>
+  <br>
+  <div>
+    <p><i>What is the most common vehicle transmission type?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Most%20Common%20Vehicle%20Transmission%20Type.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;These results indicate that out of a total of roughly 459,400 vehicles, a small proportion, 15.7K vehicles (3.42%) are Manual transmissions, while the vast majority, 443.6K vehicles (96.58%) are Automatic transmissions. Overall, the results suggest that automatic vehicles are the preferred choice of vehicle transmission among vehicle owners and manufacturers.</p>
+  </div>
+</details>
 
----
+<details>
+  <summary><strong>Geographical Inquiries</strong></summary>
+  <div>
+    <p><i>Which states have the highest number of vehicles registered?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Top%20States%20with%20Most%20Vehicles%20Sold.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;These results illustrate the distribution of registered vehicles across the United States. Florida has the highest number of registered vehicles, totaling 73,405 units, highlighting its large population and high vehicle ownership rate. California follows closely behind with 63,579 units, reflecting its status as the most populous state. Texas—with 40,393 units, also features prominently on the list, owing to its significant presence in the automotive landscape as a manufacturing and transportation export base. The remaining states with the highest number of vehicles sold are Georgia at 29,761 units, Pennsylvania at 23,522 units, New Jersey at 22,578 units, Illinois at 21,144 units, Ohio at 19,771 units, Tennessee at 18,476 units, and lastly, North Carolina at 18,040 units. These results overall affirm the high demand for vehicles in states hosting large populations.</p>
+  </div>
+</details>
 
-## 📈 Key Business Insights
-
-### 💰 Pricing Trends
-
-- Both **market price and selling price increased** from 2014 to 2015  
-- Gap between market and selling price **narrowed significantly**, indicating:
-  - Improved pricing efficiency  
-  - Stronger market alignment  
-
----
-
-### 📊 Sales Performance
-
-- Sales show **high volatility across months and quarters**
-- Q4 2014 recorded a **significant spike in revenue and volume**
-- 2015 displayed **fluctuating demand patterns**, suggesting:
-  - Seasonal trends  
-  - External market influences  
-
----
-
-### 🚘 Product Performance
-
-- **Top-performing vehicle types:**
-  - Sedan (dominant in both revenue and volume)
-  - SUV (strong secondary demand)
-  - Crew Cab (niche but valuable segment)
-
-- Insight:
-  > Consumers prioritize **comfort, practicality, and passenger capacity**
-
----
-
-### 🏷️ Brand Performance
-
-- **Top brands by revenue:**
-  - Ford (market leader)
-  - Chevrolet
-  - Nissan
-  - Toyota
-  - BMW  
-
-- **Top brands by volume:**
-  - Ford dominates with ~33% market share  
-
----
-
-### 👤 Consumer Preferences
-
-- **Body Type:** Sedans (47.5%) and SUVs (27%) dominate  
-- **Color Trends:** Neutral colors (Black, White, Silver, Gray) lead  
-- **Transmission:**  
-  - Automatic: ~96%  
-  - Manual: ~3%  
-
-> Clear shift toward **convenience-driven consumer behavior**
-
----
-
-### 🌍 Geographic Insights
-
-- Top states by vehicle sales:
-  - Florida  
-  - California  
-  - Texas  
-
-- Insight:
-  > Sales volume strongly correlates with **population density and economic activity**
-
----
-
-### 🛠️ Vehicle Usage Patterns
-
-- Highest mileage observed in:
-  - Xtracabs  
-  - Cab Plus  
-  - Ram Vans  
-
-- Insight:
-  > Utility-focused vehicles are associated with **higher usage intensity**
-
----
-
-## 📌 Business Impact
-
-This analysis enables:
-
-- **Dealerships** to optimize pricing strategies  
-- **Manufacturers** to align production with demand  
-- **Marketers** to target high-performing segments  
-- **Analysts** to forecast trends and identify anomalies  
-
----
-
-## 🧠 Strategic Takeaways
-
-- Market efficiency is improving (price convergence)
-- Sedans and SUVs dominate both demand and revenue
-- Consumer behavior favors **practicality + automation**
-- Sales volatility indicates opportunity for **predictive modeling**
-- Geographic concentration highlights **regional strategy importance**
-
----
-
-## ⚙️ Tech Stack
-
-- **SQL** – Data extraction & transformation  
-- **Python (Pandas, NumPy)** – Data cleaning & analysis  
-- **Visualization Tools** – Dashboarding & insights presentation  
-
----
-
-## 🚀 Future Enhancements
-
-- Build **predictive pricing models**  
-- Implement **demand forecasting (time-series models)**  
-- Integrate **real-time data pipelines**  
-- Deploy **interactive dashboards (Power BI / Tableau)**  
-
----
-
-## 📎 Dataset Source
-
-Vehicle Sales and Market Trends Dataset (Kaggle)  
-Published by Syed Anwar, 2024  
+<details>
+  <summary><strong>Other Inquiries</strong></summary>
+  <div>
+    <p><i>Which vehicle types have the highest median mileage?</i></p>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/heischichou/Vehicle-Sales-Analysis/main/assets/Median%20Mileage%20by%20Vehicle%20Body%20Type.png"></img>
+    </div>
+    <br>
+    <p align="justify">&nbsp;&nbsp;These results show the highest median mileage figures among different vehicle types. In terms of median mileage, Xtracabs has the highest at 161,950 miles. Following the Xtracab, the Cab Plus and Ram Van types have the second and third-highest median mileages, with 120,154 and 106,595 miles, respectively. The remaining highest median mileage vehicle types are Extended Cabs at 105,499 miles, Club Cabs at 104,536, King Cabs at 95,739 miles, Mega Cabs at 93,571 miles, Quad Cabs at 85,999 miles, Super Cabs at 81,287 miles, and lastly, Crew Cabs at 71,962 miles. These results suggest that Cabs of varying configurations tend to have higher mileage versus other vehicle types, such as Sedans and SUVs.</p>
+  </div>
+</details>
